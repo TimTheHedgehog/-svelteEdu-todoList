@@ -1,0 +1,30 @@
+{
+  "name": "less1",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.0.4",
+    "postcss-html": "^1.5.0",
+    "sass": "^1.63.6",
+    "stylelint": "^15.9.0",
+    "stylelint-config-recommended-scss": "^12.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^5.0.1",
+    "svelte": "^3.58.0",
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "@taiga-ui/cdk": "^3.34.0",
+    "@taiga-ui/core": "^3.34.0",
+    "@taiga-ui/icons": "^3.34.0",
+    "@taiga-ui/kit": "^3.34.0",
+    "svelte-icons": "^2.1.0"
+  }
+}
