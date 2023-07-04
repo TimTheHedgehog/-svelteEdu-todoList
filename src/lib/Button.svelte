@@ -1,9 +1,12 @@
 <script>
 	export let size = 'L';
-
 	export let backgroundColor = "#526ED3";
 	export let backgroundColorHover = "#6C86E2";
 	export let textColor = "#fff";
+
+	let isHovered = false;
+
+	$: currentColor = isHovered ? backgroundColorHover : backgroundColor;
 </script>
 
 <button
@@ -11,9 +14,10 @@
 	class:size-M={size == 'M'}
 	class:size-S={size == 'S'}
 	class:size-XS={size == 'XS'}
-	style:background={backgroundColor}
-	
+	style:background={currentColor}
 	style:color={textColor}
+	on:mouseenter={() => (isHovered = true)}
+  on:mouseleave={() => (isHovered = false)}
 	{...$$restProps}
 	>
 	{#if $$slots.icoLeft}
