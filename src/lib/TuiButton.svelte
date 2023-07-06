@@ -1,6 +1,4 @@
 <script>
-	import { query_selector_all } from "svelte/internal";
-
 	/**
 	 * Component Taiga UI Button
 	 *
@@ -157,10 +155,6 @@
 		&.size-fill {
 			width: 100%;
 			height: 5.6rem;
-		}
-
-		@media (hover: none) and (pointer: coarse) {
-			pointer-events: none;
 		}
 	}
 </style>
