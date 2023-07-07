@@ -7,7 +7,7 @@
 	 * @slot - Default button title text
 	 * @slot icoLeft - For left ico, have auto size 24x24px for 'L','M' 16x16px for 'S' and 'XS', use ico component teg
 	 *
-	 * @param {string} size - have 'L','M','S','XS' and "fill" sizes
+	 * @param {string} size - have 'L','M','S','XS' and "Fill" sizes
 	 * @param {string} backgroundColor - background color in HEX
 	 * @param {string} backgroundColorHover - background color on hover in HEX
 	 * @param {string} textColor - text color in HEX
