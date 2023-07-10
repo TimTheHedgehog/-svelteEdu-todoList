@@ -118,6 +118,6 @@
 		outline: 1px solid red;
 		outline-offset: 20px;
 
-		max-height: calc(100vh - 220px);
+		max-height: calc(50vh);
 	}
 </style>
