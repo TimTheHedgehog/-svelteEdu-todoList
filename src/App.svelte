@@ -9,7 +9,7 @@
 	import ToDoList from "./lib/ToDoList.svelte";
 	import TuiInput from "./lib/TuiInput.svelte";
 
-	let todoInput;
+	let todoInput, todoItemsWrapper, toDoList;
 
 	let todoItems = [
 		{
@@ -59,6 +59,12 @@
 			return event.detail.id == todo.id ? false : true;
 		});
 	}
+
+	function todoListAfterUpdate(event) {
+		if (event.detail.autoScroll) {
+			todoItemsWrapper.scrollTo(0, todoItemsWrapper.scrollHeight);
+		}
+	}
 </script>
 
 <main>
@@ -87,11 +93,13 @@
 			</div>
 		</form>
 
-		<article class="todo__items">
+		<article class="todo__items" bind:this={todoItemsWrapper}>
 			<ToDoList
 				{todoItems}
 				on:toggletodo={handleToggleTodo}
 				on:deleTodo={handleDeleteTodo}
+				on:afterUpdate={todoListAfterUpdate}
+				bind:this={toDoList}
 			/>
 		</article>
 	</section>
@@ -115,9 +123,14 @@
 	.todo__items {
 		overflow: auto;
 
-		outline: 1px solid red;
-		outline-offset: 20px;
+		border: 1px solid var(--tui-base-03);
 
-		max-height: calc(50vh);
+		border-radius: 10px;
+
+		padding: 20px;
+
+		height: calc(50vh);
+
+		background: var(--tui-base-01);
 	}
 </style>

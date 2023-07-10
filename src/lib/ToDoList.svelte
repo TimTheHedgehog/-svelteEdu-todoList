@@ -1,16 +1,16 @@
 <script>
-	import { createEventDispatcher, onDestroy, onMount } from "svelte";
+	import {
+		afterUpdate,
+		createEventDispatcher,
+		onDestroy,
+		onMount,
+	} from "svelte";
 	import TuiButton from "./TuiButton.svelte";
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 
 	export let todoItems = [];
-
-	// onMount(() => {
-	// 	console.log("Mounted");
-	// });
-	// onDestroy(() => {
-	// 	console.log("Destroyed");
-	// });
+	let prevTodoItems = todoItems;
+	let autoScroll = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -26,6 +26,17 @@
 			id,
 		});
 	}
+
+	$: {
+		autoScroll = todoItems.length > prevTodoItems.length;
+		prevTodoItems = todoItems;
+	}
+
+	afterUpdate(() => {
+		dispatch("afterUpdate", {
+			autoScroll,
+		});
+	});
 </script>
 
 {#each todoItems as todoItem (todoItem.id)}
