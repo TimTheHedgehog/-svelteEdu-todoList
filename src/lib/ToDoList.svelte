@@ -1,9 +1,16 @@
 <script>
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher, onDestroy, onMount } from "svelte";
 	import TuiButton from "./TuiButton.svelte";
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 
 	export let todoItems = [];
+
+	// onMount(() => {
+	// 	console.log("Mounted");
+	// });
+	// onDestroy(() => {
+	// 	console.log("Destroyed");
+	// });
 
 	const dispatch = createEventDispatcher();
 

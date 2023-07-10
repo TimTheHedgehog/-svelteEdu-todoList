@@ -111,4 +111,13 @@
 			margin-bottom: 30px;
 		}
 	}
+
+	.todo__items {
+		overflow: auto;
+
+		outline: 1px solid red;
+		outline-offset: 20px;
+
+		max-height: calc(100vh - 220px);
+	}
 </style>
