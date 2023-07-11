@@ -12,6 +12,8 @@ dist-ssr
 *.local
 
 # Editor directories and files
+postcss.config.js
+.stylelintrc
 .vscode/*
 !.vscode/extensions.json
 .idea
