@@ -1,13 +1,11 @@
 <script>
 	import { v4 as uuid } from "uuid";
 
-	import Button from "./lib/TuiButton.svelte";
-
-	import TuiIconCheckCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconCheckCircleLarge.svelte";
-	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
-
-	import ToDoList from "./lib/ToDoList.svelte";
 	import TuiInput from "./lib/TuiInput.svelte";
+	import Button from "./lib/TuiButton.svelte";
+	import ToDoList from "./lib/ToDoList.svelte";
+
+	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
 
 	let todoInput, todoItemsWrapper, toDoList;
 
@@ -85,6 +83,8 @@
 					textColor="var(--tui-text-01-night)"
 					type="submit"
 					disabled={!todoInput}
+					aria-label="Add element"
+					title="Add element"
 					>Add todo
 					<div slot="icoLeft">
 						<TuiIconPlusCircleLarge />
@@ -118,19 +118,19 @@
 		&__button {
 			margin-bottom: 30px;
 		}
-	}
 
-	.todo__items {
-		overflow: auto;
+		&__items {
+			overflow: auto;
 
-		border: 1px solid var(--tui-base-03);
+			border: 1px solid var(--tui-base-03);
 
-		border-radius: 10px;
+			border-radius: 10px;
 
-		padding: 20px;
+			padding: 20px;
 
-		height: calc(50vh);
+			height: calc(50vh);
 
-		background: var(--tui-base-01);
+			background: var(--tui-base-01);
+		}
 	}
 </style>
