@@ -25,7 +25,7 @@
 		font-family: Manrope, sans-serif;
 		font-weight: 500;
 		font-style: normal;
-		font-size: 1.5rem;
+		font-size: 1.6rem;
 		line-height: 2.4rem;
 
 		background: var(--night-text-text-01, #fff);

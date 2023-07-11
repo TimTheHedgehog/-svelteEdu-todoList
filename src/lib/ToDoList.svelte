@@ -35,36 +35,40 @@
 	});
 </script>
 
-{#each todoItems as todoItem (todoItem.id)}
-	<ul class="todo-element">
-		<label class="todo-element__label">
-			<input
-				class="todo-element__delete-ico"
-				type="checkbox"
-				checked={todoItem.completed}
-				on:input={() => {
-					handleToggleTodo(todoItem.id, !todoItem.completed);
+{#if todoItems.length > 0}
+	{#each todoItems as todoItem (todoItem.id)}
+		<ul class="todo-element">
+			<label class="todo-element__label">
+				<input
+					class="todo-element__delete-ico"
+					type="checkbox"
+					checked={todoItem.completed}
+					on:input={() => {
+						handleToggleTodo(todoItem.id, !todoItem.completed);
+					}}
+				/>
+				<li class="todo-element__title" class:through={todoItem.completed}>
+					{todoItem.title}
+				</li>
+			</label>
+			<TuiButton
+				label={false}
+				size={"S"}
+				backgroundColor={"var(--tui-negative)"}
+				backgroundColorHover={"var(--tui-negative-hover)"}
+				on:click={() => {
+					handleDeleteTodo(todoItem.id);
 				}}
-			/>
-			<li class="todo-element__title" class:through={todoItem.completed}>
-				{todoItem.title}
-			</li>
-		</label>
-		<TuiButton
-			label={false}
-			size={"S"}
-			backgroundColor={"var(--tui-negative)"}
-			backgroundColorHover={"var(--tui-negative-hover)"}
-			on:click={() => {
-				handleDeleteTodo(todoItem.id);
-			}}
-			aria-label={`Remove element ${todoItem.title}`}
-			title={`Remove element`}
-		>
-			<div slot="icoLeft"><TuiIconTrash2Large /></div>
-		</TuiButton>
-	</ul>
-{/each}
+				aria-label={`Remove element ${todoItem.title}`}
+				title={`Remove element`}
+			>
+				<div slot="icoLeft"><TuiIconTrash2Large /></div>
+			</TuiButton>
+		</ul>
+	{/each}
+{:else}
+	<p class="todo-element__not-founded-label">Elements not founded</p>
+{/if}
 
 <style lang="scss">
 	:root {
@@ -99,8 +103,18 @@
 			word-wrap: break-word;
 
 			&.through {
+				opacity: 0.5;
+
 				text-decoration: line-through;
 			}
+		}
+
+		&__not-founded-label {
+			font-family: Manrope, sans-serif;
+			font-weight: 500;
+			font-style: normal;
+			font-size: 1.5rem;
+			color: var(--tui-text-03);
 		}
 	}
 </style>
