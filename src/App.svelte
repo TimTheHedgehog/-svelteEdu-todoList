@@ -1,67 +1,79 @@
 <script>
-	import { v4 as uuid } from "uuid";
+	import {v4 as uuid} from "uuid";
 
 	import TuiInput from "./lib/TuiInput.svelte";
 	import Button from "./lib/TuiButton.svelte";
 	import ToDoList from "./lib/ToDoList.svelte";
 
 	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
+	import {onMount} from "svelte";
 
 	let todoInput, todoItemsWrapper, toDoList;
+	let todoItems = [];
+	let loadingError, isLoading;
+	let afterUpdateCounter = 0;
 
-	let todoItems = [
-		{
-			id: uuid(),
-			title: "Title 1",
-			completed: true,
-		},
-		{
-			id: uuid(),
-			title: "Title 2",
-			completed: false,
-		},
-		{
-			id: uuid(),
-			title: "Title 3",
-			completed: true,
-		},
-	];
+	onMount(() => {
+		loadTodos();
+	});
+
+	async function loadTodos() {
+		isLoading = true;
+		await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					loadingError = "Error loading todos from server";
+					console.log("Loading error");
+				}
+			})
+			.then(todoItemsFromAPI => (todoItems = todoItemsFromAPI));
+		isLoading = false;
+	}
 
 	function addTodo() {
 		if (!todoInput) return;
 
-		todoItems = [
-			...todoItems,
-			{
+		fetch("https://jsonplaceholder.typicode.com/todos", {
+			method: "POST",
+			headers: {"Content-type": "application/json"},
+			body: JSON.stringify({
 				id: uuid(),
 				title: todoInput,
 				completed: false,
-			},
-		];
+			}),
+		})
+			.then(response => response.json())
+			.then(element => {
+				todoItems = [...todoItems, {...element, id: uuid()}];
+			});
 
 		todoInput = "";
 	}
 
 	function handleToggleTodo(event) {
-		todoItems = todoItems.map((todo) => {
+		todoItems = todoItems.map(todo => {
 			if (todo.id == event.detail.id) {
-				return { ...todo, completed: event.detail.value };
+				return {...todo, completed: event.detail.value};
 			}
-			return { ...todo };
+			return {...todo};
 		});
-		console.log(todoItems);
 	}
 
 	function handleDeleteTodo(event) {
-		todoItems = todoItems.filter((todo) => {
+		todoItems = todoItems.filter(todo => {
 			return event.detail.id == todo.id ? false : true;
 		});
 	}
 
 	function todoListAfterUpdate(event) {
-		if (event.detail.autoScroll) {
+		if (event.detail.autoScroll && afterUpdateCounter > 3) {
 			todoItemsWrapper.scrollTo(0, todoItemsWrapper.scrollHeight);
+		} else {
+			todoItemsWrapper.scrollTo(0, 0);
 		}
+		afterUpdateCounter++;
 	}
 </script>
 
@@ -96,6 +108,8 @@
 		<article class="todo__items" bind:this={todoItemsWrapper}>
 			<ToDoList
 				{todoItems}
+				{isLoading}
+				{loadingError}
 				on:toggletodo={handleToggleTodo}
 				on:deleTodo={handleDeleteTodo}
 				on:afterUpdate={todoListAfterUpdate}

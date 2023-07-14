@@ -1,33 +1,35 @@
 {
-  "name": "less1",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build --base ./",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.0.4",
-    "postcss-html": "^1.5.0",
-    "sass": "^1.63.6",
-    "stylelint": "^15.9.0",
-    "stylelint-config-recommended-scss": "^12.0.0",
-    "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.0.1",
-    "svelte": "^3.58.0",
-    "vite": "^4.3.9"
-  },
-  "dependencies": {
-    "@taiga-ui/cdk": "^3.34.0",
-    "@taiga-ui/core": "^3.34.0",
-    "@taiga-ui/icons": "^3.34.0",
-    "@taiga-ui/kit": "^3.34.0",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.25",
-    "svelte-icons": "^2.1.0",
-    "uuid": "^9.0.0"
-  }
+	"name": "less1",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build --base ./",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^2.0.4",
+		"autoprefixer": "^10.4.14",
+		"postcss": "^8.4.26",
+		"postcss-html": "^1.5.0",
+		"prettier": "^2.8.8",
+		"prettier-plugin-svelte": "^2.10.1",
+		"sass": "^1.63.6",
+		"stylelint": "^15.10.1",
+		"stylelint-config-recommended-scss": "^12.0.0",
+		"stylelint-declaration-block-no-ignored-properties": "^2.7.0",
+		"stylelint-order": "^6.0.3",
+		"stylelint-scss": "^5.0.1",
+		"svelte": "^3.58.0",
+		"vite": "^4.3.9"
+	},
+	"dependencies": {
+		"@taiga-ui/cdk": "^3.34.0",
+		"@taiga-ui/core": "^3.34.0",
+		"@taiga-ui/icons": "^3.34.0",
+		"@taiga-ui/kit": "^3.34.0",
+		"svelte-icons": "^2.1.0",
+		"uuid": "^9.0.0"
+	}
 }

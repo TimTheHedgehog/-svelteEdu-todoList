@@ -6,6 +6,8 @@
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 
 	export let todoItems = [];
+	export let isLoading = false;
+	export let loadingError = null;
 
 	let prevTodoItems = todoItems;
 	let autoScroll = false;
@@ -32,10 +34,15 @@
 		dispatch("afterUpdate", {
 			autoScroll,
 		});
+		console.log(todoItems);
 	});
 </script>
 
-{#if todoItems.length > 0}
+{#if loadingError}
+	<p class="todo-element__not-founded-label">{loadingError}</p>
+{:else if isLoading}
+	<p class="todo-element__not-founded-label">Loading...</p>
+{:else if todoItems.length > 0}
 	{#each todoItems as todoItem (todoItem.id)}
 		<ul class="todo-element">
 			<label class="todo-element__label">
