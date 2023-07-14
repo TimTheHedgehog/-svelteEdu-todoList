@@ -1,5 +1,5 @@
 <script>
-	import { afterUpdate, createEventDispatcher } from "svelte";
+	import {afterUpdate, createEventDispatcher} from "svelte";
 	const dispatch = createEventDispatcher();
 
 	import TuiButton from "./TuiButton.svelte";

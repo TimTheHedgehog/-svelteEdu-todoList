@@ -11,7 +11,7 @@
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];
 	let loadingError, isLoading;
-	let afterUpdateCounter = 0;
+	let isAdding = false;
 
 	onMount(() => {
 		loadTodos();
@@ -35,6 +35,7 @@
 	function addTodo() {
 		if (!todoInput) return;
 
+		isAdding = true;
 		fetch("https://jsonplaceholder.typicode.com/todos", {
 			method: "POST",
 			headers: {"Content-type": "application/json"},
@@ -68,12 +69,10 @@
 	}
 
 	function todoListAfterUpdate(event) {
-		if (event.detail.autoScroll && afterUpdateCounter > 3) {
+		if (event.detail.autoScroll && isAdding) {
 			todoItemsWrapper.scrollTo(0, todoItemsWrapper.scrollHeight);
-		} else {
-			todoItemsWrapper.scrollTo(0, 0);
 		}
-		afterUpdateCounter++;
+		isAdding = false;
 	}
 </script>
 
