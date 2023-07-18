@@ -51,10 +51,11 @@
 					class="todo-element__delete-ico"
 					type="checkbox"
 					checked={todoItem.completed}
-					on:input={() => {
+					disabled={disabledItems.includes(todoItem.id)}
+					on:input={event => {
+						event.currentTarget.checked = todoItem.completed;
 						handleToggleTodo(todoItem.id, !todoItem.completed);
 					}}
-					disabled={disabledItems.includes(todoItem.id)}
 				/>
 				<li class="todo-element__title" class:through={todoItem.completed}>
 					{todoItem.title}

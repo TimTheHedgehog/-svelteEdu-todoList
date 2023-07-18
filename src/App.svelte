@@ -68,13 +68,14 @@
 				"Content-type": "application/json; charset=UTF-8",
 			},
 			body: JSON.stringify({
-				completed: !event.detail.value,
+				completed: event.detail.value,
 			}),
-		}).then(response => {
+		}).then(async response => {
 			if (response.ok) {
+				const updatedTodo = await response.json();
 				todoItems = todoItems.map(todo => {
 					if (todo.id == event.detail.id) {
-						return {...todo, completed: event.detail.value};
+						return updatedTodo;
 					}
 					return {...todo};
 				});
