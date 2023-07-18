@@ -7,11 +7,13 @@
 
 	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
 	import {onMount} from "svelte";
+	import {assign} from "svelte/internal";
 
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];
 	let loadingError, isLoading;
 	let isAdding = false;
+	let disabledItems = [];
 
 	onMount(() => {
 		loadTodos();
@@ -62,9 +64,28 @@
 		});
 	}
 
-	function handleDeleteTodo(event) {
+	async function handleDeleteTodo(event) {
+		const id = event.detail.id;
+
+		if (disabledItems.includes(id)) return;
+		disabledItems = [...disabledItems, id];
+
+		await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+			method: "DELETE",
+		}).then(response => {
+			if (response.ok) {
+				todoItems = todoItems.filter(
+					element => element.id != event.detail.todo,
+				);
+			}
+		});
+
 		todoItems = todoItems.filter(todo => {
 			return event.detail.id == todo.id ? false : true;
+		});
+
+		disabledItems = disabledItems.filter(element => {
+			element != id;
 		});
 	}
 
@@ -106,6 +127,7 @@
 
 		<article class="todo__items" bind:this={todoItemsWrapper}>
 			<ToDoList
+				{disabledItems}
 				{todoItems}
 				{isLoading}
 				{loadingError}

@@ -8,6 +8,7 @@
 	export let todoItems = [];
 	export let isLoading = false;
 	export let loadingError = null;
+	export let disabledItems = [];
 
 	let prevTodoItems = todoItems;
 	let autoScroll = false;
@@ -53,6 +54,7 @@
 					on:input={() => {
 						handleToggleTodo(todoItem.id, !todoItem.completed);
 					}}
+					disabled={disabledItems.includes(todoItem.id)}
 				/>
 				<li class="todo-element__title" class:through={todoItem.completed}>
 					{todoItem.title}
@@ -63,11 +65,12 @@
 				size={"S"}
 				backgroundColor={"var(--tui-negative)"}
 				backgroundColorHover={"var(--tui-negative-hover)"}
+				aria-label={`Remove element ${todoItem.title}`}
+				title={`Remove element`}
 				on:click={() => {
 					handleDeleteTodo(todoItem.id);
 				}}
-				aria-label={`Remove element ${todoItem.title}`}
-				title={`Remove element`}
+				disabled={disabledItems.includes(todoItem.id)}
 			>
 				<div slot="icoLeft"><TuiIconTrash2Large /></div>
 			</TuiButton>
