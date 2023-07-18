@@ -56,11 +56,33 @@
 	}
 
 	function handleToggleTodo(event) {
-		todoItems = todoItems.map(todo => {
-			if (todo.id == event.detail.id) {
-				return {...todo, completed: event.detail.value};
+		const id = event.detail.id;
+		console.log(event);
+
+		if (disabledItems.includes(id)) return;
+		disabledItems = [...disabledItems, id];
+
+		fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+			method: "PATCH",
+			headers: {
+				"Content-type": "application/json; charset=UTF-8",
+			},
+			body: JSON.stringify({
+				completed: !event.detail.value,
+			}),
+		}).then(response => {
+			if (response.ok) {
+				todoItems = todoItems.map(todo => {
+					if (todo.id == event.detail.id) {
+						return {...todo, completed: event.detail.value};
+					}
+					return {...todo};
+				});
 			}
-			return {...todo};
+
+			disabledItems = disabledItems.filter(element => {
+				element != id;
+			});
 		});
 	}
 
@@ -74,14 +96,8 @@
 			method: "DELETE",
 		}).then(response => {
 			if (response.ok) {
-				todoItems = todoItems.filter(
-					element => element.id != event.detail.todo,
-				);
+				todoItems = todoItems.filter(element => element.id != event.detail.id);
 			}
-		});
-
-		todoItems = todoItems.filter(todo => {
-			return event.detail.id == todo.id ? false : true;
 		});
 
 		disabledItems = disabledItems.filter(element => {
