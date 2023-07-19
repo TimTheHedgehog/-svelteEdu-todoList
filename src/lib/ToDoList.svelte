@@ -47,44 +47,46 @@
 {:else if isLoading}
 	<p class="todo-element__not-founded-label">Loading...</p>
 {:else if todoItems.length > 0}
-	{#each todoItems as todoItem (todoItem.id)}
-		<ul
-			class="todo-element"
-			in:fade|local={{duration: transitionCounter}}
-			out:fly|local={{x: -100}}
-			animate:flip={{duration: 400}}
-		>
-			<label class="todo-element__label">
-				<input
-					class="todo-element__delete-ico"
-					type="checkbox"
-					checked={todoItem.completed}
-					disabled={disabledItems.includes(todoItem.id)}
-					on:input={event => {
-						event.currentTarget.checked = todoItem.completed;
-						handleToggleTodo(todoItem.id, !todoItem.completed);
-					}}
-				/>
-				<li class="todo-element__title" class:through={todoItem.completed}>
-					{todoItem.title}
-				</li>
-			</label>
-			<TuiButton
-				label={false}
-				size={"S"}
-				backgroundColor={"var(--tui-negative)"}
-				backgroundColorHover={"var(--tui-negative-hover)"}
-				aria-label={`Remove element ${todoItem.title}`}
-				title={`Remove element`}
-				on:click={() => {
-					handleDeleteTodo(todoItem.id);
-				}}
-				disabled={disabledItems.includes(todoItem.id)}
+	<ul>
+		{#each todoItems as todoItem (todoItem.id)}
+			<li
+				class="todo-element"
+				in:fade|local={{duration: transitionCounter}}
+				out:fly|local={{x: -100}}
+				animate:flip={{duration: 400}}
 			>
-				<div slot="icoLeft"><TuiIconTrash2Large /></div>
-			</TuiButton>
-		</ul>
-	{/each}
+				<label class="todo-element__label">
+					<input
+						class="todo-element__delete-ico"
+						type="checkbox"
+						checked={todoItem.completed}
+						disabled={disabledItems.includes(todoItem.id)}
+						on:input={event => {
+							event.currentTarget.checked = todoItem.completed;
+							handleToggleTodo(todoItem.id, !todoItem.completed);
+						}}
+					/>
+					<li class="todo-element__title" class:through={todoItem.completed}>
+						{todoItem.title}
+					</li>
+				</label>
+				<TuiButton
+					label={false}
+					size={"S"}
+					backgroundColor={"var(--tui-negative)"}
+					backgroundColorHover={"var(--tui-negative-hover)"}
+					aria-label={`Remove element ${todoItem.title}`}
+					title={`Remove element`}
+					on:click={() => {
+						handleDeleteTodo(todoItem.id);
+					}}
+					disabled={disabledItems.includes(todoItem.id)}
+				>
+					<div slot="icoLeft"><TuiIconTrash2Large /></div>
+				</TuiButton>
+			</li>
+		{/each}
+	</ul>
 {:else}
 	<p class="todo-element__not-founded-label">Elements not founded</p>
 {/if}

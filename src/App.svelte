@@ -51,7 +51,8 @@
 		})
 			.then(response => response.json())
 			.then(element => {
-				todoItems = [...todoItems, {...element, id: uuid()}];
+				todoItems = [{...element, id: uuid()}, ...todoItems];
+				console.log(todoItems);
 			});
 
 		todoInput = "";
@@ -75,12 +76,22 @@
 		}).then(async response => {
 			if (response.ok) {
 				const updatedTodo = await response.json();
-				todoItems = todoItems.map(todo => {
-					if (todo.id == event.detail.id) {
-						return updatedTodo;
-					}
-					return {...todo};
-				});
+
+				if (!("id" in updatedTodo)) {
+					todoItems = todoItems.map(todo => {
+						if (todo.id == event.detail.id) {
+							return {...todo, completed: event.detail.value};
+						}
+						return {...todo};
+					});
+				} else {
+					todoItems = todoItems.map(todo => {
+						if (todo.id == event.detail.id) {
+							return updatedTodo;
+						}
+						return {...todo};
+					});
+				}
 			}
 
 			disabledItems = disabledItems.filter(element => {
@@ -110,7 +121,7 @@
 
 	function todoListAfterUpdate(event) {
 		if (event.detail.autoScroll && isAdding) {
-			todoItemsWrapper.scrollTo(0, todoItemsWrapper.scrollHeight);
+			todoItemsWrapper.scrollTo(0, 0);
 		}
 		isAdding = false;
 	}
