@@ -7,13 +7,15 @@
 
 	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
 	import {onMount} from "svelte";
-	import {assign} from "svelte/internal";
+	import ToDoCounter from "./lib/ToDoCounter.svelte";
 
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];
 	let loadingError, isLoading;
 	let isAdding = false;
 	let disabledItems = [];
+
+	$: completedTodos = todoItems.filter(todo => todo.completed == true);
 
 	onMount(() => {
 		loadTodos();
@@ -142,6 +144,11 @@
 			</div>
 		</form>
 
+		<section class="todo__counters">
+			<ToDoCounter todoNumber={todoItems.length}>Number of todos:</ToDoCounter>
+			<ToDoCounter todoNumber={completedTodos.length}>Completed:</ToDoCounter>
+		</section>
+
 		<article class="todo__items" bind:this={todoItemsWrapper}>
 			<ToDoList
 				{disabledItems}
@@ -169,6 +176,13 @@
 
 		&__button {
 			margin-bottom: 30px;
+		}
+
+		&__counters {
+			display: flex;
+			justify-content: space-between;
+
+			padding: 0 1rem;
 		}
 
 		&__items {

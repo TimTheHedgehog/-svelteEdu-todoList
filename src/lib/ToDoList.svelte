@@ -4,6 +4,8 @@
 
 	import TuiButton from "./TuiButton.svelte";
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
+	import {fade, fly} from "svelte/transition";
+	import {flip} from "svelte/animate";
 
 	export let todoItems = [];
 	export let isLoading = false;
@@ -12,6 +14,7 @@
 
 	let prevTodoItems = todoItems;
 	let autoScroll = false;
+	let transitionCounter = 300;
 
 	function handleToggleTodo(id, value) {
 		dispatch("toggletodo", {
@@ -45,7 +48,12 @@
 	<p class="todo-element__not-founded-label">Loading...</p>
 {:else if todoItems.length > 0}
 	{#each todoItems as todoItem (todoItem.id)}
-		<ul class="todo-element">
+		<ul
+			class="todo-element"
+			in:fade|local={{duration: transitionCounter}}
+			out:fly|local={{x: -100}}
+			animate:flip={{duration: 400}}
+		>
 			<label class="todo-element__label">
 				<input
 					class="todo-element__delete-ico"
