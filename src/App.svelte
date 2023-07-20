@@ -9,6 +9,8 @@
 	import {onMount} from "svelte";
 	import ToDoCounter from "./lib/ToDoCounter.svelte";
 
+	import spin from "./lib/transitions/spin";
+
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];
 	let loadingError, isLoading;

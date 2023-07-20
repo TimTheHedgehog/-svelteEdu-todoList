@@ -7,6 +7,8 @@
 	import {fade, fly} from "svelte/transition";
 	import {flip} from "svelte/animate";
 
+	import lineThrough from "./transitions/line-through";
+
 	export let todoItems = [];
 	export let isLoading = false;
 	export let loadingError = null;
@@ -43,15 +45,26 @@
 </script>
 
 {#if loadingError}
-	<p class="todo-element__not-founded-label">{loadingError}</p>
+	<p
+		in:fly|local={{x: 100}}
+		out:fade|local={{duration: 100}}
+		class="todo-element__not-founded-label"
+	>
+		{loadingError}
+	</p>
 {:else if isLoading}
-	<p class="todo-element__not-founded-label">Loading...</p>
+	<p
+		in:fly|local={{x: 100}}
+		out:fade|local={{duration: 100}}
+		class="todo-element__not-founded-label"
+	>
+		Loading...
+	</p>
 {:else if todoItems.length > 0}
 	<ul>
 		{#each todoItems as todoItem (todoItem.id)}
 			<li
 				class="todo-element"
-				in:fade|local={{duration: transitionCounter}}
 				out:fly|local={{x: -100}}
 				animate:flip={{duration: 400}}
 			>
@@ -66,8 +79,11 @@
 							handleToggleTodo(todoItem.id, !todoItem.completed);
 						}}
 					/>
-					<li class="todo-element__title" class:through={todoItem.completed}>
-						{todoItem.title}
+					<li class="todo-element__title">
+						<span
+							class="todo-element__title-span"
+							class:through-active={todoItem.completed}>{todoItem.title}</span
+						>
 					</li>
 				</label>
 				<TuiButton
@@ -122,12 +138,17 @@
 			font-size: 1.5rem;
 			line-height: 2.4rem;
 			word-wrap: break-word;
+		}
 
-			&.through {
-				opacity: 0.5;
+		&__title-span {
+			text-decoration: none;
 
-				text-decoration: line-through;
-			}
+			background-image: linear-gradient(black, black);
+			background-position: center left;
+			background-size: 0% 2px;
+			background-repeat: no-repeat;
+
+			transition: background-size 300ms ease-in-out;
 		}
 
 		&__not-founded-label {
@@ -137,5 +158,11 @@
 			font-size: 1.5rem;
 			color: var(--tui-text-03);
 		}
+	}
+
+	.through-active {
+		opacity: 0.5;
+
+		background-size: 100% 2px;
 	}
 </style>

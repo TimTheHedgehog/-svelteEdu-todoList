@@ -1,5 +1,6 @@
 <script>
 	import {fly} from "svelte/transition";
+	import spin from "./transitions/spin";
 
 	export let todoNumber = 0;
 </script>
@@ -7,7 +8,7 @@
 <div class="counter">
 	<slot>Replace me</slot>
 	{#key todoNumber}
-		<span in:fly|local={{y: -10}}>{todoNumber}</span>
+		<span in:spin>{todoNumber}</span>
 	{/key}
 </div>
 
