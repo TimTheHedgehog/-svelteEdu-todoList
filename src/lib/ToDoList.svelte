@@ -7,8 +7,6 @@
 	import {fade, fly} from "svelte/transition";
 	import {flip} from "svelte/animate";
 
-	import lineThrough from "./transitions/line-through";
-
 	export let todoItems = [];
 	export let isLoading = false;
 	export let loadingError = null;

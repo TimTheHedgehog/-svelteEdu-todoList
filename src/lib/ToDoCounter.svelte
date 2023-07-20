@@ -1,15 +1,19 @@
 <script>
-	import {fly} from "svelte/transition";
+	import {fade, fly} from "svelte/transition";
 	import spin from "./transitions/spin";
+	import {afterUpdate, onMount} from "svelte";
 
-	export let todoNumber = 0;
+	export let todoNumber;
+	export let isTodoItemsLoaded = false;
 </script>
 
 <div class="counter">
 	<slot>Replace me</slot>
-	{#key todoNumber}
-		<span in:spin>{todoNumber}</span>
-	{/key}
+	{#if isTodoItemsLoaded}
+		{#key todoNumber}
+			<span in:spin|local>{todoNumber}</span>
+		{/key}
+	{/if}
 </div>
 
 <style lang="scss">

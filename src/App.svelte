@@ -16,6 +16,7 @@
 	let loadingError, isLoading;
 	let isAdding = false;
 	let disabledItems = [];
+	let isTodoItemsLoaded = false;
 
 	$: completedTodos = todoItems.filter(todo => todo.completed == true);
 
@@ -36,6 +37,8 @@
 			})
 			.then(todoItemsFromAPI => (todoItems = todoItemsFromAPI));
 		isLoading = false;
+
+		isTodoItemsLoaded = true;
 	}
 
 	function addTodo() {
@@ -158,8 +161,12 @@
 		</form>
 
 		<section class="todo__counters">
-			<ToDoCounter todoNumber={todoItems.length}>Number of todos:</ToDoCounter>
-			<ToDoCounter todoNumber={completedTodos.length}>Completed:</ToDoCounter>
+			<ToDoCounter {isTodoItemsLoaded} todoNumber={todoItems.length}
+				>Number of todos:</ToDoCounter
+			>
+			<ToDoCounter {isTodoItemsLoaded} todoNumber={completedTodos.length}
+				>Completed:</ToDoCounter
+			>
 		</section>
 
 		<article class="todo__items" bind:this={todoItemsWrapper}>
