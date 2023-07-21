@@ -6,7 +6,7 @@
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 	import {fade, fly} from "svelte/transition";
 	import {flip} from "svelte/animate";
-	import StrikeItem from "./effects/LineThroughEffect.svelte";
+	import StrikeItem from "./effects/LineThroughEffect/LineThroughEffect.svelte";
 
 	export let todoItems = [];
 	export let isLoading = false;

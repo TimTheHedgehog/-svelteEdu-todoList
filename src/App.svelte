@@ -8,8 +8,9 @@
 	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
 	import {onMount} from "svelte";
 	import ToDoCounter from "./lib/ToDoCounter.svelte";
+	import Lt from "./lib/effects/LineThroughEffect/LineThroughEffect.svelte";
 
-	import spin from "./lib/transitions/spin";
+	import LineThroughEffectSettings from "./lib/effects/LineThroughEffect/LineThroughEffectSettings";
 
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];

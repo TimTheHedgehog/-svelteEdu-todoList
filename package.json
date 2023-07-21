@@ -25,6 +25,7 @@
 		"vite": "^4.3.9"
 	},
 	"dependencies": {
+		"@emotion/css": "^11.11.2",
 		"@taiga-ui/cdk": "^3.34.0",
 		"@taiga-ui/core": "^3.34.0",
 		"@taiga-ui/icons": "^3.34.0",
