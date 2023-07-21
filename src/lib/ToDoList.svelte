@@ -6,6 +6,7 @@
 	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 	import {fade, fly} from "svelte/transition";
 	import {flip} from "svelte/animate";
+	import StrikeItem from "./effects/LineThroughEffect.svelte";
 
 	export let todoItems = [];
 	export let isLoading = false;
@@ -78,9 +79,8 @@
 						}}
 					/>
 					<li class="todo-element__title">
-						<span
-							class="todo-element__title-span"
-							class:through-active={todoItem.completed}>{todoItem.title}</span
+						<StrikeItem isThrough={todoItem.completed}
+							>{todoItem.title}</StrikeItem
 						>
 					</li>
 				</label>
@@ -138,17 +138,6 @@
 			word-wrap: break-word;
 		}
 
-		&__title-span {
-			text-decoration: none;
-
-			background-image: linear-gradient(black, black);
-			background-position: center left;
-			background-size: 0% 2px;
-			background-repeat: no-repeat;
-
-			transition: background-size 300ms ease-in-out;
-		}
-
 		&__not-founded-label {
 			font-family: Manrope, sans-serif;
 			font-weight: 500;
@@ -156,11 +145,5 @@
 			font-size: 1.5rem;
 			color: var(--tui-text-03);
 		}
-	}
-
-	.through-active {
-		opacity: 0.5;
-
-		background-size: 100% 2px;
 	}
 </style>
