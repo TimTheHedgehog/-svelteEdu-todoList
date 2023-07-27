@@ -3,6 +3,13 @@
 		"moduleResolution": "bundler",
 		"target": "ESNext",
 		"module": "ESNext",
+		"baseUrl": ".",
+		"paths": {
+			"$lib/*": ["src/lib/*"],
+			"$utils/*": ["src/utils/*"],
+			"$stores/*": ["src/stores/*"],
+			"$assets/*": ["src/assets/*"]
+		},
 		/**
 		 * svelte-preprocess cannot figure out whether you have
 		 * a value or a type, so tell TypeScript to enforce using
@@ -28,14 +35,5 @@
 	 * Use global.d.ts instead of compilerOptions.types
 	 * to avoid limiting type declarations.
 	 */
-	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"$lib/*": ["src/lib/*"],
-			"$utils/*": ["src/utils/*"],
-			"$stores/*": ["src/stores/*"],
-			"$assets/*": ["src/assets/*"]
-		}
-	}
+	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
 }
