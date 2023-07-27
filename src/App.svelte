@@ -1,16 +1,16 @@
 <script>
 	import {v4 as uuid} from "uuid";
 
-	import TuiInput from "./lib/TuiInput.svelte";
-	import Button from "./lib/TuiButton.svelte";
-	import ToDoList from "./lib/ToDoList.svelte";
+	import TuiInput from "$lib/components/TuiInput.svelte";
+	import Button from "$lib/components/TuiButton.svelte";
+	import ToDoList from "$lib/components/ToDoList.svelte";
 
 	import TuiIconPlusCircleLarge from "./assets/tui-icons/iconsComponents/TuiIconPlusCircleLarge.svelte";
 	import {onMount} from "svelte";
-	import ToDoCounter from "./lib/ToDoCounter.svelte";
-	import Lt from "./lib/effects/LineThroughEffect/LineThroughEffect.svelte";
+	import ToDoCounter from "$lib/components/ToDoCounter.svelte";
+	import Lt from "$lib/effects/LineThroughEffect/LineThroughEffect.svelte";
 
-	import LineThroughEffectSettings from "./lib/effects/LineThroughEffect/LineThroughEffectSettings";
+	import LineThroughEffectSettings from "$lib/effects/LineThroughEffect/LineThroughEffectSettings";
 
 	let todoInput, todoItemsWrapper, toDoList;
 	let todoItems = [];

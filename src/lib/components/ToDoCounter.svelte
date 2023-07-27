@@ -1,6 +1,6 @@
 <script>
 	import {fade, fly} from "svelte/transition";
-	import spin from "./transitions/spin";
+	import spin from "$lib/transitions/spin";
 	import {afterUpdate, onMount} from "svelte";
 
 	export let todoNumber;

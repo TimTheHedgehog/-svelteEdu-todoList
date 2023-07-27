@@ -2,11 +2,11 @@
 	import {afterUpdate, createEventDispatcher} from "svelte";
 	const dispatch = createEventDispatcher();
 
-	import TuiButton from "./TuiButton.svelte";
-	import TuiIconTrash2Large from "../assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
+	import TuiButton from "$lib/components/TuiButton.svelte";
+	import TuiIconTrash2Large from "$assets/tui-icons/iconsComponents/TuiIconTrash2Large.svelte";
 	import {fade, fly} from "svelte/transition";
 	import {flip} from "svelte/animate";
-	import StrikeItem from "./effects/LineThroughEffect/LineThroughEffect.svelte";
+	import StrikeItem from "$lib/effects/LineThroughEffect/LineThroughEffect.svelte";
 
 	export let todoItems = [];
 	export let isLoading = false;
