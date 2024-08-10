@@ -1,6 +1,9 @@
-"use strict";
-
-module.exports = {
-  trailingComma: "all",
-  quoteProps: "consistent",
-};
+{
+	"trailingComma": "all",
+	"semi": true,
+	"singleQuote": false,
+	"bracketSpacing": false,
+	"jsxBracketSameLine": true,
+	"arrowParents": "avoid",
+	"alignObjectProperties": true
+}
